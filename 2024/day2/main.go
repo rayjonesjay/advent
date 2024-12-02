@@ -30,7 +30,6 @@ func main(){
 		line := strings.TrimSpace(scanner.Text())
 		list := strings.Fields(line)
 		ln := toList(list)
-		ln = tolerate(ln)
 		if helper(ln){
 			counter++
 		}
@@ -97,33 +96,6 @@ func isIncreasing(arr []int) bool {
 	return false
 }
 
-func tolerate(list []int) []int {
-	isIncreasing := isIncreasing(list)
-	fmt.Println("before",list)
-
-	for i := 0; i < len(list)-1; i++ {
-
-		if isIncreasing {
-			diff := list[i+1] - list[i]
-			if diff <= 0 {
-				list = pop(list,i)
-				fmt.Println("after",list)
-				// fmt.Println("level",i)
-				return list
-			}
-		}else {
-			diff := list[i+1] - list[i]
-			if diff >= 0 {
-				list = pop(list,i)
-				fmt.Println("after",list)
-				// fmt.Println("level",i)
-				return list
-			}
-		}
-	}
-
-	return list
-}
 
 func pop(list []int, i int) []int {
 	list = append(list[:i], list[i+1:]...)
