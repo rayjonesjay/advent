@@ -7,6 +7,7 @@ import(
 	"strconv"
 	"fmt"
 	"slices"
+	"day2/q2"
 )
 
 func Run(){
@@ -19,6 +20,7 @@ func Run(){
 	fd := Reader(arg[0])
 	scanner := Scanner(fd)
 	res := 0
+	feet := 0
 	for scanner.Scan() {
 		line := scanner.Text()
 		list := strings.Split(line,"x")
@@ -26,9 +28,11 @@ func Run(){
 		ll , _ := strconv.Atoi(l)
 		ww , _ := strconv.Atoi(w)
 		hh , _ := strconv.Atoi(h)
+		feet += q2.Runner(ll,ww,hh)
 		res = res + (2*ll*ww) + (2*ww*hh) + (2*hh*ll) + FindSmallArea(ll,ww,hh)
 	}
-	fmt.Println(res)
+	fmt.Println("square feet",res)
+	fmt.Println("feet",feet)
 }
 
 func Scanner(fd *os.File) *bufio.Scanner {
